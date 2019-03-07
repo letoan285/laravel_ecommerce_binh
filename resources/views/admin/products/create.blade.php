@@ -30,7 +30,7 @@ Create new category
 
     <div class="form-group">
         <label for="">Parent ID</label>
-        <select name="parent_id" id="" class="form-control">
+        <select name="category_id" id="" class="form-control">
                 <option value="">Chon danh muc cha</option>
             @foreach ($categories as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>

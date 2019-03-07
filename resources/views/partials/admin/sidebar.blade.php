@@ -77,6 +77,25 @@
                 </ul>
             </li>
             <li>
+                    <a href="javascript:;">
+                    <i class="fa fa-cart-plus"></i>
+                    <span class="title">Products</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{ route('products.index') }}">
+                            <i class="icon-home"></i>
+                            List</a>
+                        </li>
+                        <li>
+                            <a href="{{route('products.create')}}">
+                            <i class="icon-basket"></i>
+                            Create</a>
+                        </li>
+                    </ul>
+                </li>
+            <li>
                 <a href="javascript:;">
                 <i class="icon-rocket"></i>
                 <span class="title">Page Layouts</span>
