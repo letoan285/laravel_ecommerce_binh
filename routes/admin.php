@@ -12,8 +12,15 @@ Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::post('/categories', 'CategoryController@store')->name('categories.store');
 
 Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
+Route::get('/categories/{id}', 'CategoryController@show')->name('categories.show');
+Route::post('/categories/{id}/delete', 'CategoryController@destroy')->name('categories.destroy');
 
 Route::get('/dashboard', 'CategoryController@dashboard');
+
+Route::resource('/profiles', 'ProfileController');
+
+
+Route::resource('/users', 'UserController');
 
 Route::get('/products', 'ProductController@index')->name('products.index');
 Route::get('/products/create', 'ProductController@create')->name('products.create');

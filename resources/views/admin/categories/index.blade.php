@@ -42,12 +42,16 @@ Category List
                 
             <tr>
                 <td>{{$loop->index + 1}}</td>
-                <td><a href="">{{$cate->name }} </a></td>
+                <td><a href="{{route('categories.show', $cate->id)}}">{{$cate->name }} </a></td>
                 <td>{{$cate->slug }}</td>
                 <td>{{$cate->status == 1 ? 'Hien thi' : 'Khong hien thi' }}</td>
                 <td>
-                    <a class="btn btn-sm btn-primary" href=""><i class="fa fa-pencil"></i></a>
-                    <a class="btn btn-sm btn-danger" href=""><i class="fa fa-times"></i></a>
+                    <a class="btn btn-sm btn-primary" href="{{route('categories.destroy', $cate->id)}}"><i class="fa fa-pencil"></i></a>
+                    <form action="{{route('categories.destroy', $cate->id)}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                    
+                    </form>
                 </td>
             </tr>
 

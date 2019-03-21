@@ -63,6 +63,11 @@ class CategoryController extends Controller
         );
 
         */
+        $request->validate([
+            'name' => 'required|min:5|max:250',
+            'slug' =>'required|min:5|max:250',
+            'parent_id' => 'required'
+        ]);
 
         $category = new Category();
 
@@ -87,7 +92,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $cate = Category::find($id);
+        return view('admin.categories.show', compact('cate'));
     }
 
     /**
@@ -121,6 +127,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($id){
+            $cate = Category::find($id);
+            $cate->delete();
+            return redirect()->route('categories.index');
+        }
     }
 }

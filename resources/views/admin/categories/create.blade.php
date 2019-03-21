@@ -16,11 +16,14 @@ Create new category
     <div class="form-group">
         <label for="">Category name</label>
         <input type="text" class="form-control" name="name">
+        <span style="color:red">{{$errors->first('name')}}</span>
+        
     </div>
     
     <div class="form-group">
         <label for="">Slug</label>
         <input type="text" class="form-control" name="slug" placeholder="VD: danh-muc-1">
+        <span style="color:red">{{$errors->first('name')}}</span>
     </div>
 
     <div class="form-group">
@@ -37,6 +40,7 @@ Create new category
                 
             @endforeach
         </select>
+        <span style="color:red">{{$errors->first('name')}}</span>
     </div>
 
     <div class="form-group">
