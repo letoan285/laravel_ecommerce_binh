@@ -36,5 +36,6 @@
 <script src="{{ asset('metronic/assets/admin/layout/scripts/demo.js') }}" type="text/javascript"></script>
 <script src="{{ asset('metronic/assets/admin/pages/scripts/index.js') }}" type="text/javascript"></script>
 <script src="{{ asset('metronic/assets/admin/pages/scripts/tasks.js') }}" type="text/javascript"></script>
+<script src="{{ asset('lib/bootbox/js/bootbox.min.js') }}" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 @yield('scripts')

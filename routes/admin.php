@@ -27,3 +27,7 @@ Route::get('/products/create', 'ProductController@create')->name('products.creat
 
 Route::get('products/{id}', 'ProductController@show')->name('products.show');
 Route::get('products/{id}/edit', 'ProductController@edit')->name('products.edit');
+
+Route::get('tags/{id}/products', 'TagController@getProductByTagId');
+Route::post('/products', 'ProductController@store')->name('products.store');
+Route::get('/products/{id}/delete', 'ProductController@destroy')->name('products.destroy');

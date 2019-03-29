@@ -2,16 +2,16 @@
 
 
 @section('title')
-Category
+Product
 @stop
 
 
 @section('page_title')
-Create new category
+Create new product
 @stop
 
 @section('content')
-<form action="{{route('categories.store')}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         <label for="">Category name</label>
@@ -46,6 +46,17 @@ Create new category
             <option value="0">Khong Hien Thi</option>
         </select>
     </div>
+
+    <div class="form-group">
+            <label for="">Tags</label>
+            <select name="tag[]" id="" class="form-control" multiple>
+                @foreach ($tags as $tag)
+                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                    
+                @endforeach
+                
+            </select>
+        </div>
 
     <div class="form-group">
             <input type="submit" id="btn" class="btn btn-success" value="Submit">
