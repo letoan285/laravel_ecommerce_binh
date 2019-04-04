@@ -13,6 +13,16 @@ Product List
 .title-create {
     margin-bottom: 5px;
 }
+button.absolute {
+    top: 0;
+    right: 16px;
+    height: 33px;
+    width: 33px;
+    border-radius: 100%;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+}
 </style>
 @stop
 
@@ -24,9 +34,17 @@ Product List
 @section('content')
 <div class="row">
     <table class="table table-bordered">
-      
+      <div class="col-md-6">
+          <form action="" method="GET" class="relative">
+              <input type="text" name="keyword" placeholder="Search" class="form-control" value="{{$keyword}}">
+              <button class="absolute"><i class="fa fa-search"></i></button>
+          </form>
+      </div>
+        <span class="pull-right">
 
             <a class="btn btn-success title-create" href="{{route('products.create')}}">Them moi</a>
+        </span>
+
        
         <thead>
             <tr>
@@ -34,7 +52,7 @@ Product List
                 <th> Image </th>
                 <th>Product name </th>
                 <th>Status</th>
-                <th>Category</th>
+                <th>description</th>
                 <th>Tags</th>
                 <th>Options</th>
             </tr>
@@ -46,7 +64,7 @@ Product List
                     <td><a href=""><img src="{{$product->image}}" alt=""></a> </td>
                     <td><a href="">{{$product->name}}</a> </td>
                     <td><a href="">{{$product->status}}</a> </td>
-                    <td><a href="">{{$product->category_id}}</a> </td>
+                    <td><a href="">{{$product->description}}</a> </td>
                     <td>
                         @foreach ( ($product->tags)    as $tag)
                         
@@ -65,6 +83,9 @@ Product List
             @endforeach
         </tbody>
     </table>
+    <div class="text-center">
+            {{ $products->links() }}
+    </div>  
 </div>
 @endsection
 @section('scripts')

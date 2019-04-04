@@ -82,7 +82,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     Laravel
-                <h1>my name is {{$myName}} == {{$name}}</h1>
+                <h1>my name is</h1>
                 </div>
 
                 <div class="links">

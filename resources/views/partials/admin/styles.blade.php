@@ -20,5 +20,6 @@
 <link href="{{ asset('metronic/assets/admin/layout/css/layout.css') }}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('metronic/assets/admin/layout/css/themes/darkblue.css') }}" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="{{ asset('metronic/assets/admin/layout/css/custom.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 @yield('styles')

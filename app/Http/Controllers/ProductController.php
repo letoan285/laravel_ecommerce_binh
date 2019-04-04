@@ -10,15 +10,28 @@ use DB;
 
 class ProductController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        return view('admin.products.index', compact('products'));
+        $pageSize = $request->pageSize == null ? 20 : $request->pageSize;
+        $keyword = $request->keyword;
+        $path = "";
+        if(!$keyword) {
+            $products = Product::paginate($pageSize);
+            $path.= "?pageSize=$pageSize";
+        }else {
+            $products = Product::where('name', 'like', "%$keyword%")
+                                ->orwhere('description', 'like', "%$keyword%")
+                                ->paginate($pageSize);
+            $path .= "?pageSize=$pageSize&keyword=$keyword";
+        }
+        $products->withPath($path);
+        return view('admin.products.index', compact('products', 'keyword', 'pageSize'));
     }
 
     /**
@@ -105,5 +118,74 @@ class ProductController extends Controller
            $product->tags()->detach();
            return redirect()->route('products.index');
        }
+    }
+    public function getProductApi(Request $request)
+    {
+        return Product::all();
+    }
+    public function postProductApi(Request $request)
+    {
+        $product = new Product();
+        $product->name = $request->name;
+        $product->slug = $request->slug;
+        $product->description = $request->description;
+        $product->image = 'noimage.png';
+        $product->product_code = $request->product_code;
+        $product->list_price = $request->list_price;
+        $product->sell_price = $request->sell_price;
+        $product->stock = $request->stock;
+        $product->supplier_id = $request->supplier_id;
+        // dd($request->tag);
+       if($product->save()) {
+
+            // for($i = 0; $i< count($request->tag); $i++){
+            //     DB::table('product_tag')->insert([
+            //         'product_id' => $product->id,
+            //         'tag_id'=> $request->tag[$i]
+            //     ]);
+            // }
+            $product->tags()->sync($request->tag, false);
+
+           return response(200);
+       }
+    }
+    public function deleteProductApi(Request $request, $id)
+    {
+         // dd($product->id);
+       $product = Product::find($id);
+       if($product->delete()) {
+           $product->tags()->detach();
+           return response("Xoa Thanh Cong");
+       }else {
+        return response("Xoa That bai");
+       }
+    }
+    public function getOneProductApi(Request $request, $id) 
+    {
+        return Product::findOrFail($id);
+         
+    }
+    public function putProductApi(Request $request, $id)
+    {
+        // dd($request->all());
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->slug = $request->slug;
+        $product->description = $request->description;
+        $product->image =  $request->image;
+        $product->product_code = $request->product_code;
+        $product->list_price = $request->list_price;
+        $product->sell_price = $request->sell_price;
+        $product->stock = $request->stock;
+        $product->supplier_id = $request->supplier_id;
+        // dd($request->tag);
+       if($product->update()) {
+
+           return $product;
+           
+       } else {
+        return response("Xoa That Bai");
+       }
+
     }
 }
