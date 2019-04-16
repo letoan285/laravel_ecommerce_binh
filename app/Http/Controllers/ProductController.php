@@ -11,6 +11,12 @@ use DB;
 class ProductController extends Controller
 {
 
+    protected $model;
+
+    public function __construct(Product $products)
+    {
+        $this->model = $products;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -82,7 +88,7 @@ class ProductController extends Controller
 
     public function show(Product $product, $id)
     {
-        $product = Product::find($id);
+        $product = $this->model->find($id);
         return view('admin.products.detail', compact('product'));
     }
 
@@ -119,9 +125,9 @@ class ProductController extends Controller
            return redirect()->route('products.index');
        }
     }
-    public function getProductApi(Request $request)
+    public function getProductApi()
     {
-        return Product::all();
+        return $this->model->all();
     }
     public function postProductApi(Request $request)
     {

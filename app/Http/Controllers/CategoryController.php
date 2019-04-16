@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use App\Repositories\Category\CategoryRepositoryInterface;
  
 class CategoryController extends Controller
 {
+    protected $model;
+    
+    public function __construct(CategoryRepositoryInterface $categories)
+    {
+        $this->model = $categories;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->where('status', 1)->get();
-
-        return view('admin.categories.index', compact('categories'));
+       return $this->model->getAll();
     }
     public function dashboard() {
         
